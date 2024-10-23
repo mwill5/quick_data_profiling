@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Data Profiling Report</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+        h1, h2 { background-color: #f2f2f2; padding: 10px; }
+        .section { padding: 20px; }
+        .table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        .table th, .table td { border: 1px solid #ddd; padding: 8px; }
+        .image { text-align: center; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Data Profiling Report</h1>
+
+    <div class="section">
+        <h2>Dataset Overview</h2>
+        <h3>First 5 Rows</h3>
+        {{ head | safe }}
+    </div>
+
+    <div class="section">
+        <h2>Data Types</h2>
+        {{ dtypes | safe }}
+    </div>
+
+    <div class="section">
+        <h2>Missing Values</h2>
+        {{ missing_values | safe }}
+        <div class="image">
+            <h3>Missing Values Heatmap</h3>
+            <img src="data:image/png;base64,{{ encoded_images[missing_img] }}" alt="Missing Values Heatmap">
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Statistical Summary</h2>
+        {{ describe | safe }}
+    </div>
+
+    {% if numeric_columns %}
+    <div class="section">
+        <h2>Distributions of Numeric Variables</h2>
+        {% for img in histograms %}
+        <div class="image">
+            <img src="data:image/png;base64,{{ encoded_images[img.split('/')[-1]] }}" alt="{{ img }}">
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if categorical_columns %}
+    <div class="section">
+        <h2>Distributions of Categorical Variables</h2>
+        {% for img in bar_charts %}
+        <div class="image">
+            <img src="data:image/png;base64,{{ encoded_images[img.split('/')[-1]] }}" alt="{{ img }}">
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if corr_img %}
+    <div class="section">
+        <h2>Correlation Matrix</h2>
+        <div class="image">
+            <img src="data:image/png;base64,{{ encoded_images[corr_img] }}" alt="Correlation Matrix">
+        </div>
+    </div>
+    {% endif %}
+
+</body>
+</html>
