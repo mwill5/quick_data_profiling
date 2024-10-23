@@ -41,7 +41,7 @@ An report.html file will be generated in your current directory.
 
 ## Example
 
-To see an example of the generated report, check out [example_report.html](example_report.html).
+To see an example of the generated report, check out [example report](https://mwill5.github.io/quick_data_profiling/example_report.html).
 
 ## License
 
