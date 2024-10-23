@@ -1,6 +1,6 @@
 # Quick Data Profiling Tool
 
-![Logo](logo.png)
+<img src="logo.png" alt="Logo" width="200"/>
 
 A comprehensive tool for quick data profiling and exploratory data analysis, generating interactive HTML reports.
 
